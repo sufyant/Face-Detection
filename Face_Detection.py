@@ -1,8 +1,8 @@
 import cv2
 import imageio
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+face_cascade = cv2.CascadeClassifier('Cascade/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('Cascade/haarcascade_eye.xml')
 
 def detect(frame):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -16,9 +16,9 @@ def detect(frame):
             cv2.rectangle(color_face, (ex,ey), (ex+ew,ey+eh), (0,255,0), 2)
     return frame
 
-reader = imageio.get_reader('1.mp4')
+reader = imageio.get_reader('Data/Input.mp4')
 fps = reader.get_meta_data()['fps']
-writer = imageio.get_writer('output.mp4', fps=fps)
+writer = imageio.get_writer('Output.mp4', fps=fps)
 for i, frame in enumerate(reader):
     frame = detect(frame)
     writer.append_data(frame)
